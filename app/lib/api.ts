@@ -43,4 +43,18 @@ export async function fetchSubmissions(config: ListViewConfig): Promise<{
     throw new Error('Failed to fetch submissions');
   }
   return response.json();
+}
+
+interface StatesResponse {
+  country: string;
+  states: string[];
+}
+
+export async function fetchStates(country: string): Promise<string[]> {
+  const response = await fetch(`${BASE_URL}/api/getStates?country=${country}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch states');
+  }
+  const data: StatesResponse = await response.json();
+  return data.states;
 } 

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { InsuranceSubmission, ListViewConfig } from '@/app/types/insurance';
 import { fetchSubmissions } from '@/app/lib/api';
+import { SubmissionsSkeleton } from './submissions-skeleton';
 
 export function SubmissionsList() {
   const t = useTranslations('SubmissionsList');
@@ -59,11 +60,7 @@ export function SubmissionsList() {
   };
 
   if (isLoading) {
-    return (
-      <div className='flex justify-center items-center min-h-[200px]'>
-        <span className='loading loading-spinner loading-lg'></span>
-      </div>
-    );
+    return <SubmissionsSkeleton />;
   }
 
   if (error) {
@@ -142,14 +139,14 @@ export function SubmissionsList() {
 
       <div className='flex justify-center gap-2'>
         <button
-          className='btn btn-outline'
+          className='btn btn-sm btn-outline'
           onClick={() => handlePageChange(config.page - 1)}
           disabled={config.page === 1}>
           {t('previous')}
         </button>
         <span className='flex items-center'>{t('page', { page: config.page })}</span>
         <button
-          className='btn btn-outline'
+          className='btn btn-sm btn-outline'
           onClick={() => handlePageChange(config.page + 1)}
           disabled={submissions.length < config.pageSize}>
           {t('next')}

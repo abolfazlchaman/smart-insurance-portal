@@ -11,11 +11,11 @@ export function ThemeSwitcher() {
     setMounted(true);
   }, []);
 
-  // Show a loading state or nothing until mounted
+  // Show a skeleton button until mounted
   if (!mounted) {
     return (
       <div className='btn btn-ghost btn-circle'>
-        <div className='h-5 w-5' />
+        <div className='skeleton h-5 w-5 rounded-full'></div>
       </div>
     );
   }

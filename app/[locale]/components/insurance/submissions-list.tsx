@@ -1,14 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { InsuranceSubmission, ListViewConfig } from '@/app/types/insurance';
 import { fetchSubmissions } from '@/app/lib/api';
 
 export function SubmissionsList() {
   const t = useTranslations('SubmissionsList');
-  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [submissions, setSubmissions] = useState<InsuranceSubmission[]>([]);
@@ -92,7 +90,7 @@ export function SubmissionsList() {
             {columns.map((column) => (
               <li key={column}>
                 <label className='label cursor-pointer'>
-                  <span className='label-text text-wrap'>{column}</span>
+                  <span className='label-text text-wrap my-2'>{column}</span>
                   <input
                     type='checkbox'
                     className='checkbox'

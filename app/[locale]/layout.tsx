@@ -1,7 +1,6 @@
 import { Navbar } from './components/navbar';
 import { Footer } from './components/footer';
 import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
 import { ThemeProvider } from 'next-themes';
 import { vazirMatn } from 'next-persian-fonts/vazirmatn';
 import { Inter } from 'next/font/google';
@@ -37,7 +36,7 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   const direction = getDirection(locale);

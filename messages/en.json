@@ -1,7 +1,11 @@
 {
   "HomePage": {
     "title": "Welcome to Insurance Portal",
-    "about": "About Us"
+    "about": "About Us",
+    "applyInsurance": "Apply for Insurance",
+    "yourApplications": "Your Applications",
+    "loadingForm": "Loading form...",
+    "loadingApplications": "Loading applications..."
   },
   "Navigation": {
     "home": "Home",

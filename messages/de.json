@@ -1,7 +1,11 @@
 {
   "HomePage": {
     "title": "Willkommen im Versicherungsportal",
-    "about": "Über uns"
+    "about": "Über uns",
+    "applyInsurance": "Versicherung beantragen",
+    "yourApplications": "Ihre Anträge",
+    "loadingForm": "Formular wird geladen...",
+    "loadingApplications": "Anträge werden geladen..."
   },
   "Navigation": {
     "home": "Startseite",

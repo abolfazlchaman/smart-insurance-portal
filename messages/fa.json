@@ -1,7 +1,11 @@
 {
   "HomePage": {
     "title": "به پورتال بیمه خوش آمدید",
-    "about": "درباره ما"
+    "about": "درباره ما",
+    "applyInsurance": "درخواست بیمه",
+    "yourApplications": "درخواست‌های شما",
+    "loadingForm": "در حال بارگذاری فرم...",
+    "loadingApplications": "در حال بارگذاری درخواست‌ها..."
   },
   "Navigation": {
     "home": "خانه",

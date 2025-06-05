@@ -1,7 +1,11 @@
 {
   "HomePage": {
     "title": "Sigorta Portalına Hoş Geldiniz",
-    "about": "Hakkımızda"
+    "about": "Hakkımızda",
+    "applyInsurance": "Sigorta Başvurusu",
+    "yourApplications": "Başvurularınız",
+    "loadingForm": "Form yükleniyor...",
+    "loadingApplications": "Başvurular yükleniyor..."
   },
   "Navigation": {
     "home": "Ana Sayfa",

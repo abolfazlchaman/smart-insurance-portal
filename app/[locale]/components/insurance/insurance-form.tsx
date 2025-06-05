@@ -137,6 +137,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
           const options = stateOptions[formData[field.dynamicOptions.dependsOn]] || [];
           return (
             <select
+              defaultValue=''
               name={field.id}
               required={field.required}
               className='select select-bordered w-full'
@@ -164,6 +165,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
 
         return (
           <select
+            defaultValue=''
             name={field.id}
             required={field.required}
             className='select select-bordered w-full'
@@ -189,7 +191,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
         }
 
         return (
-          <div className='flex flex-row gap-2'>
+          <div className='flex flex-row gap-2 flex-wrap max-w-full'>
             {field.options.map((option) => (
               <label
                 key={option}
@@ -214,7 +216,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
         }
 
         return (
-          <div className='flex flex-row gap-2'>
+          <div className='flex flex-row gap-2 flex-wrap max-w-full'>
             {field.options.map((option) => (
               <label
                 key={option}
@@ -266,7 +268,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
 
   return (
     <div className='space-y-6'>
-      <div className='flex gap-4 justify-center'>
+      <div className='flex flex-row flex-wrap gap-4 justify-center items-center max-w-full'>
         <button
           type='button'
           className={`btn ${selectedType === 'health' ? 'btn-primary' : 'btn-outline'}`}

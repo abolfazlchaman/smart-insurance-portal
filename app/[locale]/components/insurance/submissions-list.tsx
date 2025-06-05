@@ -73,7 +73,7 @@ export function SubmissionsList() {
 
   return (
     <div className='space-y-4'>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center flex-wrap max-sm:justify-center gap-4'>
         <h2 className='text-2xl font-bold'>{t('title')}</h2>
         <div className='dropdown dropdown-end'>
           <label

@@ -1,7 +1,7 @@
 export function FormSkeleton() {
   return (
     <div className='space-y-6'>
-      <div className='flex gap-4 justify-center'>
+      <div className='flex flex-row flex-wrap gap-4 justify-center items-center max-w-full'>
         <div className='btn btn-outline skeleton h-12 w-32'></div>
         <div className='btn btn-outline skeleton h-12 w-32'></div>
         <div className='btn btn-outline skeleton h-12 w-32'></div>

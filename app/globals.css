@@ -3,6 +3,6 @@
 
 @layer base {
   html {
-    font-family: var(--font-vazirMatn), system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
   }
 }

@@ -4,7 +4,10 @@ import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { ThemeProvider } from 'next-themes';
 import { vazirMatn } from 'next-persian-fonts/vazirmatn';
+import { Inter } from 'next/font/google';
 import '../globals.css';
+
+const inter = Inter({ subsets: ['latin'] });
 
 /**
  * Determines text direction based on locale
@@ -37,12 +40,15 @@ export default async function RootLayout({
   const direction = getDirection(locale);
   const messages = await getMessages(locale);
 
+  // Determine which font to use based on locale
+  const fontClassName = locale === 'fa' ? vazirMatn.className : inter.className;
+
   return (
     <html
       lang={locale}
       dir={direction}
       suppressHydrationWarning>
-      <body className={`${vazirMatn.className} antialiased`}>
+      <body className={`${fontClassName} antialiased`}>
         <ThemeProvider
           attribute='data-theme'
           defaultTheme='system'

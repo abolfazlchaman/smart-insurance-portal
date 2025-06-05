@@ -5,6 +5,8 @@ import { notFound } from 'next/navigation';
 import { ThemeProvider } from 'next-themes';
 import { vazirMatn } from 'next-persian-fonts/vazirmatn';
 import { Inter } from 'next/font/google';
+import { getTranslations } from 'next-intl/server';
+import { getMessages, type Locale } from '@/app/lib/messages';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -21,24 +23,25 @@ const getDirection = (locale: string) => {
   return rtlLocales.includes(locale) ? 'rtl' : 'ltr';
 };
 
-async function getMessages(locale: string) {
-  try {
-    return (await import(`../../messages/${locale}.json`)).default;
-  } catch (error) {
-    notFound();
-  }
+export async function generateMetadata() {
+  const t = await getTranslations('Metadata');
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
 }
 
-export default async function RootLayout({
+export default async function LocaleLayout({
   children,
-  params,
+  params: { locale },
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
-  const { locale } = await params;
   const direction = getDirection(locale);
-  const messages = await getMessages(locale);
+  const messages = getMessages(locale as Locale);
+  const metadata = await generateMetadata();
 
   // Determine which font to use based on locale
   const fontClassName = locale === 'fa' ? vazirMatn.className : inter.className;
@@ -48,12 +51,17 @@ export default async function RootLayout({
       lang={locale}
       dir={direction}
       suppressHydrationWarning>
+      <head>
+        <title>{metadata.title}</title>
+        <meta
+          name='description'
+          content={metadata.description}
+        />
+      </head>
       <body className={`${fontClassName} antialiased`}>
         <ThemeProvider
           attribute='data-theme'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange>
+          defaultTheme='light'>
           <NextIntlClientProvider
             locale={locale}
             messages={messages}>

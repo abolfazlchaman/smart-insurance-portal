@@ -1,6 +1,13 @@
 {
   "HomePage": {
-    "title": "Hallo Welt!",
-    "about": "Zur Über uns Seite"
+    "title": "Willkommen im Versicherungsportal",
+    "about": "Über uns"
+  },
+  "Navigation": {
+    "home": "Startseite",
+    "about": "Über uns"
+  },
+  "Footer": {
+    "copyright": "© 2025 Versicherungsportal. Alle Rechte vorbehalten."
   }
 }

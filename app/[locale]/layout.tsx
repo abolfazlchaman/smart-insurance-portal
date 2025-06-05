@@ -1,8 +1,9 @@
-import { NextIntlClientProvider, hasLocale } from 'next-intl';
-import { notFound } from 'next/navigation';
-import { routing } from '@/i18n/routing';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Navbar } from './components/navbar';
+import { Footer } from './components/footer';
+import { NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
+import '../globals.css';
 
 const inter = Inter({
   display: 'swap',
@@ -21,12 +22,15 @@ const getDirection = (locale: string) => {
   return rtlLocales.includes(locale) ? 'rtl' : 'ltr';
 };
 
-export const metadata: Metadata = {
-  title: 'Smart Insurance Portal',
-  description: 'Your trusted insurance partner',
-};
+async function getMessages(locale: string) {
+  try {
+    return (await import(`../../messages/${locale}.json`)).default;
+  } catch (error) {
+    notFound();
+  }
+}
 
-export default async function LocaleLayout({
+export default async function RootLayout({
   children,
   params,
 }: {
@@ -34,19 +38,23 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
   const direction = getDirection(locale);
+  const messages = await getMessages(locale);
 
   return (
     <html
       lang={locale}
-      dir={direction}
-      className={inter.variable}>
-      <body className='antialiased min-h-screen font-sans'>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      dir={direction}>
+      <body className={`${inter.className} antialiased`}>
+        <NextIntlClientProvider
+          locale={locale}
+          messages={messages}>
+          <div className='min-h-screen flex flex-col'>
+            <Navbar />
+            <main className='flex-grow'>{children}</main>
+            <Footer />
+          </div>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

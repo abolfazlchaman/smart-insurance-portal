@@ -1,6 +1,13 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "title": "Welcome to Insurance Portal",
+    "about": "About Us"
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About"
+  },
+  "Footer": {
+    "copyright": "© 2025 Insurance Portal. All rights reserved."
   }
 }

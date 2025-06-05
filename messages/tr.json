@@ -1,6 +1,13 @@
 {
   "HomePage": {
-    "title": "Merhaba Dünya!",
-    "about": "Hakkımızda sayfasına git"
+    "title": "Sigorta Portalına Hoş Geldiniz",
+    "about": "Hakkımızda"
+  },
+  "Navigation": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımızda"
+  },
+  "Footer": {
+    "copyright": "© 2025 Sigorta Portalı. Tüm hakları saklıdır."
   }
 }

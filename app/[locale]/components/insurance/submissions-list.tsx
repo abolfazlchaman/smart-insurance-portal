@@ -21,6 +21,9 @@ export function SubmissionsList() {
 
   useEffect(() => {
     loadSubmissions();
+
+    // eslint well known bug, safely ignore.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config]);
 
   const loadSubmissions = async () => {

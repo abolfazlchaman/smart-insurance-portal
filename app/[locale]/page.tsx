@@ -12,14 +12,7 @@ export default async function Home() {
         <div>
           <h1 className='text-3xl font-bold mb-8'>Apply for Insurance</h1>
           <Suspense fallback={<div>Loading form...</div>}>
-            {/* TODO remove id */}
-            {forms.map((form, id) => (
-              <div
-                key={id}
-                className='mb-8'>
-                <InsuranceForm form={form} />
-              </div>
-            ))}
+            <InsuranceForm forms={forms} />
           </Suspense>
         </div>
 

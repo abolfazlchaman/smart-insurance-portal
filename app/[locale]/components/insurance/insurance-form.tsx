@@ -2,18 +2,29 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { InsuranceForm as InsuranceFormType, FormField } from '@/app/types/insurance';
+import {
+  InsuranceForm as InsuranceFormType,
+  FormField,
+  InsuranceType,
+} from '@/app/types/insurance';
 import { submitInsuranceForm } from '@/app/lib/api';
 
 interface InsuranceFormProps {
-  form: InsuranceFormType;
+  forms: InsuranceFormType[];
 }
 
-export function InsuranceForm({ form }: InsuranceFormProps) {
+export function InsuranceForm({ forms }: InsuranceFormProps) {
   const t = useTranslations('InsuranceForm');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<Record<string, any>>({});
+  const [selectedType, setSelectedType] = useState<InsuranceType | null>(null);
+
+  // Reset form data when insurance type changes
+  useEffect(() => {
+    setFormData({});
+    setError(null);
+  }, [selectedType]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,7 +33,7 @@ export function InsuranceForm({ form }: InsuranceFormProps) {
 
     try {
       const data = {
-        formId: form.formId,
+        formId: selectedForm?.formId,
         ...formData,
       };
       await submitInsuranceForm(data);
@@ -48,6 +59,19 @@ export function InsuranceForm({ form }: InsuranceFormProps) {
     const dependentValue = formData[dependsOn];
     return condition === 'equals' ? dependentValue === value : true;
   };
+
+  const selectedForm = forms.find((form) => {
+    switch (selectedType) {
+      case 'health':
+        return form.formId === 'health_insurance_application';
+      case 'home':
+        return form.formId === 'home_insurance_application';
+      case 'car':
+        return form.formId === 'car_insurance_application';
+      default:
+        return false;
+    }
+  });
 
   const renderField = (field: FormField) => {
     if (!isFieldVisible(field)) return null;
@@ -190,35 +214,64 @@ export function InsuranceForm({ form }: InsuranceFormProps) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className='space-y-6'>
-      <h2 className='text-2xl font-bold'>{form.title}</h2>
+    <div className='space-y-6'>
+      <div className='flex gap-4 justify-center'>
+        <button
+          type='button'
+          className={`btn ${selectedType === 'health' ? 'btn-primary' : 'btn-outline'}`}
+          onClick={() => setSelectedType('health')}>
+          Health Insurance
+        </button>
+        <button
+          type='button'
+          className={`btn ${selectedType === 'home' ? 'btn-primary' : 'btn-outline'}`}
+          onClick={() => setSelectedType('home')}>
+          Home Insurance
+        </button>
+        <button
+          type='button'
+          className={`btn ${selectedType === 'car' ? 'btn-primary' : 'btn-outline'}`}
+          onClick={() => setSelectedType('car')}>
+          Car Insurance
+        </button>
+      </div>
 
-      {form.fields.map((field) => (
-        <div
-          key={field.id}
-          className='form-control'>
-          <label className='label'>
-            <span className='label-text text-wrap'>{field.label}</span>
-            {field.required && <span className='text-error'>*</span>}
-          </label>
-          {renderField(field)}
-        </div>
-      ))}
+      {selectedForm ? (
+        <form
+          onSubmit={handleSubmit}
+          className='space-y-6'>
+          <h2 className='text-2xl font-bold'>{selectedForm.title}</h2>
 
-      {error && (
-        <div className='alert alert-error'>
-          <span>{error}</span>
+          {selectedForm.fields.map((field) => (
+            <div
+              key={field.id}
+              className='form-control'>
+              <label className='label'>
+                <span className='label-text text-wrap'>{field.label}</span>
+                {field.required && <span className='text-error'>*</span>}
+              </label>
+              {renderField(field)}
+            </div>
+          ))}
+
+          {error && (
+            <div className='alert alert-error'>
+              <span>{error}</span>
+            </div>
+          )}
+
+          <button
+            type='submit'
+            className='btn btn-primary w-full'
+            disabled={isSubmitting}>
+            {isSubmitting ? t('submitting') : t('submit')}
+          </button>
+        </form>
+      ) : (
+        <div className='text-center p-8 bg-base-200 rounded-lg'>
+          <p className='text-lg'>{t('selectInsuranceType')}</p>
         </div>
       )}
-
-      <button
-        type='submit'
-        className='btn btn-primary w-full'
-        disabled={isSubmitting}>
-        {isSubmitting ? t('submitting') : t('submit')}
-      </button>
-    </form>
+    </div>
   );
 }

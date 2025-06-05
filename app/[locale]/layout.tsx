@@ -1,14 +1,10 @@
-import { Inter } from 'next/font/google';
 import { Navbar } from './components/navbar';
 import { Footer } from './components/footer';
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
+import { ThemeProvider } from 'next-themes';
+import { vazirMatn } from 'next-persian-fonts/vazirmatn';
 import '../globals.css';
-
-const inter = Inter({
-  display: 'swap',
-  variable: '--font-inter',
-});
 
 /**
  * Determines text direction based on locale
@@ -44,17 +40,24 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      dir={direction}>
-      <body className={`${inter.className} antialiased`}>
-        <NextIntlClientProvider
-          locale={locale}
-          messages={messages}>
-          <div className='min-h-screen flex flex-col'>
-            <Navbar />
-            <main className='flex-grow'>{children}</main>
-            <Footer />
-          </div>
-        </NextIntlClientProvider>
+      dir={direction}
+      suppressHydrationWarning>
+      <body className={`${vazirMatn.className} antialiased`}>
+        <ThemeProvider
+          attribute='data-theme'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange>
+          <NextIntlClientProvider
+            locale={locale}
+            messages={messages}>
+            <div className='min-h-screen flex flex-col'>
+              <Navbar />
+              <main className='flex-grow'>{children}</main>
+              <Footer />
+            </div>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

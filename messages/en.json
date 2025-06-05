@@ -20,7 +20,8 @@
     "submitting": "Submitting...",
     "required": "This field is required",
     "selectPlaceholder": "Please select an option",
-    "error": "An error occurred while submitting the form"
+    "error": "An error occurred while submitting the form",
+    "selectInsuranceType": "Please select an insurance type to continue"
   },
   "SubmissionsList": {
     "title": "Your Applications",

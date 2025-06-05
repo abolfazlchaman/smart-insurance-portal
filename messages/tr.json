@@ -9,5 +9,27 @@
   },
   "Footer": {
     "copyright": "© 2025 Sigorta Portalı. Tüm hakları saklıdır."
+  },
+  "Metadata": {
+    "title": "Akıllı Sigorta Portalı",
+    "description": "Sigorta başvurusu yapın ve başvurularınızı yönetin"
+  },
+  "InsuranceForm": {
+    "title": "Sigorta Başvurusu",
+    "submit": "Başvuruyu Gönder",
+    "submitting": "Gönderiliyor...",
+    "required": "Bu alan zorunludur",
+    "selectPlaceholder": "Lütfen bir seçenek seçin",
+    "error": "Form gönderilirken hata oluştu",
+    "selectInsuranceType": "Lütfen devam etmek için bir sigorta türü seçin"
+  },
+  "SubmissionsList": {
+    "title": "Başvurularınız",
+    "columns": "Sütunlar",
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "page": "Sayfa {page}",
+    "loading": "Başvurular yükleniyor...",
+    "error": "Başvurular yüklenirken hata oluştu"
   }
 }

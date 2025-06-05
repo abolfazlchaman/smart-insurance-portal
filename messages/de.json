@@ -9,5 +9,27 @@
   },
   "Footer": {
     "copyright": "© 2025 Versicherungsportal. Alle Rechte vorbehalten."
+  },
+  "Metadata": {
+    "title": "Smartes Versicherungsportal",
+    "description": "Beantragen Sie Versicherungen und verwalten Sie Ihre Anträge"
+  },
+  "InsuranceForm": {
+    "title": "Versicherung beantragen",
+    "submit": "Antrag einreichen",
+    "submitting": "Wird eingereicht...",
+    "required": "Dieses Feld ist erforderlich",
+    "selectPlaceholder": "Bitte wählen Sie eine Option",
+    "error": "Fehler beim Einreichen des Formulars",
+    "selectInsuranceType": "Bitte wählen Sie einen Versicherungstyp aus"
+  },
+  "SubmissionsList": {
+    "title": "Ihre Anträge",
+    "columns": "Spalten",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "page": "Seite {page}",
+    "loading": "Anträge werden geladen...",
+    "error": "Fehler beim Laden der Anträge"
   }
 }

@@ -34,11 +34,12 @@ export async function generateMetadata() {
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  const { locale } = await params;
   const direction = getDirection(locale);
   const messages = getMessages(locale as Locale);
   const metadata = await generateMetadata();

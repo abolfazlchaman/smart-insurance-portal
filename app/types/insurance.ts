@@ -1,21 +1,31 @@
 export interface InsuranceForm {
-  id: string;
-  type: InsuranceType;
+  formId: string;
   title: string;
-  description: string;
   fields: FormField[];
 }
 
 export interface FormField {
   id: string;
-  type: 'text' | 'number' | 'select' | 'radio' | 'checkbox' | 'date' | 'address' | 'vehicle' | 'group';
   label: string;
+  type: 'text' | 'number' | 'select' | 'radio' | 'checkbox' | 'date' | 'group';
   required: boolean;
-  placeholder?: string;
-  options?: FormOption[];
-  conditions?: FormCondition[];
-  validation?: FormValidation;
-  nestedFields?: FormField[];
+  options?: string[];
+  fields?: FormField[];
+  validation?: {
+    min?: number;
+    max?: number;
+    pattern?: string;
+  };
+  visibility?: {
+    dependsOn: string;
+    condition: 'equals';
+    value: string;
+  };
+  dynamicOptions?: {
+    dependsOn: string;
+    endpoint: string;
+    method: string;
+  };
 }
 
 export interface FormOption {

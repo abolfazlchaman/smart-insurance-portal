@@ -19,6 +19,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [selectedType, setSelectedType] = useState<InsuranceType | null>(null);
+  const [stateOptions, setStateOptions] = useState<Record<string, string[]>>({});
 
   // Reset form data when insurance type changes
   useEffect(() => {
@@ -46,11 +47,34 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
     }
   };
 
-  const handleInputChange = (fieldId: string, value: any) => {
-    setFormData((prev) => ({
-      ...prev,
-      [fieldId]: value,
-    }));
+  const handleInputChange = async (fieldId: string, value: any) => {
+    setFormData((prev) => {
+      const newData = {
+        ...prev,
+        [fieldId]: value,
+      };
+
+      // If this is a country field, fetch states
+      if (fieldId === 'country') {
+        fetchStates(value);
+      }
+
+      return newData;
+    });
+  };
+
+  const fetchStates = async (country: string) => {
+    try {
+      const response = await fetch(`/api/getStates?country=${country}`);
+      if (!response.ok) throw new Error('Failed to fetch states');
+      const states = await response.json();
+      setStateOptions((prev) => ({
+        ...prev,
+        [country]: states,
+      }));
+    } catch (err) {
+      console.error('Error fetching states:', err);
+    }
   };
 
   const isFieldVisible = (field: FormField): boolean => {
@@ -110,6 +134,26 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
           />
         );
       case 'select':
+        if (field.dynamicOptions) {
+          const options = stateOptions[formData[field.dynamicOptions.dependsOn]] || [];
+          return (
+            <select
+              name={field.id}
+              required={field.required}
+              className='select select-bordered w-full'
+              onChange={(e) => handleInputChange(field.id, e.target.value)}>
+              <option value=''>{t('selectPlaceholder')}</option>
+              {options.map((option) => (
+                <option
+                  key={option}
+                  value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          );
+        }
+
         if (!field.options) {
           console.warn(`No options provided for select field: ${field.id}`);
           return null;
@@ -122,9 +166,9 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
             className='select select-bordered w-full'
             onChange={(e) => handleInputChange(field.id, e.target.value)}>
             <option value=''>{t('selectPlaceholder')}</option>
-            {field.options.map((option, index) => (
+            {field.options.map((option) => (
               <option
-                key={`${field.id}-${option}-${index}`}
+                key={option}
                 value={option}>
                 {option}
               </option>
@@ -138,12 +182,12 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
         }
 
         return (
-          <div className='flex flex-col gap-2'>
-            {field.options.map((option, index) => (
+          <div className='flex flex-row gap-2'>
+            {field.options.map((option) => (
               <label
-                key={`${field.id}-${option}-${index}`}
+                key={option}
                 className='label cursor-pointer'>
-                <span className='label-text text-wrap'>{option}</span>
+                <span className='label-text text-wrap my-2'>{option}</span>
                 <input
                   type='radio'
                   name={field.id}
@@ -163,12 +207,12 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
         }
 
         return (
-          <div className='flex flex-col gap-2'>
-            {field.options.map((option, index) => (
+          <div className='flex flex-row gap-2'>
+            {field.options.map((option) => (
               <label
-                key={`${field.id}-${option}-${index}`}
+                key={option}
                 className='label cursor-pointer'>
-                <span className='label-text text-wrap'>{option}</span>
+                <span className='label-text text-wrap my-2'>{option}</span>
                 <input
                   type='checkbox'
                   name={`${field.id}[]`}
@@ -200,7 +244,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
                 key={nestedField.id}
                 className='form-control'>
                 <label className='label'>
-                  <span className='label-text text-wrap'>{nestedField.label}</span>
+                  <span className='label-text text-wrap my-2'>{nestedField.label}</span>
                   {nestedField.required && <span className='text-error'>*</span>}
                 </label>
                 {renderField(nestedField)}
@@ -247,7 +291,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
               key={field.id}
               className='form-control'>
               <label className='label'>
-                <span className='label-text text-wrap'>{field.label}</span>
+                <span className='label-text text-wrap my-2'>{field.label}</span>
                 {field.required && <span className='text-error'>*</span>}
               </label>
               {renderField(field)}

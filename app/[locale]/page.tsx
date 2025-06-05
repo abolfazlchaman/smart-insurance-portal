@@ -22,7 +22,7 @@ export default async function HomePage() {
         </div>
 
         <div>
-          <h2 className='text-2xl font-semibold mb-4'>{t('yourApplications')}</h2>
+          {/* <h2 className='text-2xl font-semibold mb-4'>{t('yourApplications')}</h2> */}
           <Suspense fallback={<SubmissionsSkeleton />}>
             <SubmissionsList />
           </Suspense>

@@ -7,7 +7,7 @@ import {
   FormField,
   InsuranceType,
 } from '@/app/types/insurance';
-import { submitInsuranceForm } from '@/app/lib/api';
+import { submitInsuranceForm, fetchStates } from '@/app/lib/api';
 
 interface InsuranceFormProps {
   forms: InsuranceFormType[];
@@ -56,24 +56,23 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
 
       // If this is a country field, fetch states
       if (fieldId === 'country') {
-        fetchStates(value);
+        fetchStatesForCountry(value);
       }
 
       return newData;
     });
   };
 
-  const fetchStates = async (country: string) => {
+  const fetchStatesForCountry = async (country: string) => {
     try {
-      const response = await fetch(`/api/getStates?country=${country}`);
-      if (!response.ok) throw new Error('Failed to fetch states');
-      const states = await response.json();
+      const states = await fetchStates(country);
       setStateOptions((prev) => ({
         ...prev,
         [country]: states,
       }));
     } catch (err) {
       console.error('Error fetching states:', err);
+      setError(err instanceof Error ? err.message : t('error'));
     }
   };
 
@@ -142,7 +141,11 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
               required={field.required}
               className='select select-bordered w-full'
               onChange={(e) => handleInputChange(field.id, e.target.value)}>
-              <option value=''>{t('selectPlaceholder')}</option>
+              <option
+                value=''
+                disabled
+                label={t('selectPlaceholder')}
+              />
               {options.map((option) => (
                 <option
                   key={option}
@@ -165,7 +168,11 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
             required={field.required}
             className='select select-bordered w-full'
             onChange={(e) => handleInputChange(field.id, e.target.value)}>
-            <option value=''>{t('selectPlaceholder')}</option>
+            <option
+              value=''
+              disabled
+              label={t('selectPlaceholder')}
+            />
             {field.options.map((option) => (
               <option
                 key={option}

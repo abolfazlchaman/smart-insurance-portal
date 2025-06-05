@@ -87,7 +87,7 @@ export function SubmissionsList() {
             {columns.map((column) => (
               <li key={column}>
                 <label className='label cursor-pointer'>
-                  <span className='label-text text-wrap my-2 my-2 my-2'>{column}</span>
+                  <span className='label-text text-wrap my-2'>{column}</span>
                   <input
                     type='checkbox'
                     className='checkbox'

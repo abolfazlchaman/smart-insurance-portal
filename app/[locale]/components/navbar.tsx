@@ -12,14 +12,15 @@ const languages = [
   { code: 'fa', name: 'فارسی', flag: '🇮🇷' },
   { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
 ] as const;
 
 const navigationItems = [
   { href: '/', label: 'home' },
-  { href: '/about', label: 'about' },
-  { href: '/services', label: 'services' },
-  { href: '/contact', label: 'contact' },
-  { href: '/faq', label: 'faq' },
+  { href: '/', label: 'about' },
+  { href: '/', label: 'services' },
+  { href: '/', label: 'contact' },
+  { href: '/', label: 'faq' },
 ] as const;
 
 export function Navbar() {
@@ -101,7 +102,7 @@ export function Navbar() {
           <nav className='flex-1 flex flex-col items-center justify-center space-y-8'>
             {navigationItems.map((item) => (
               <Link
-                key={item.href}
+                key={item.label}
                 href={item.href}
                 className='text-2xl font-semibold hover:text-primary transition-colors'
                 onClick={toggleMenu}>
@@ -162,7 +163,7 @@ export function Navbar() {
       <div className='navbar-center hidden lg:flex'>
         <ul className='menu menu-horizontal px-1'>
           {navigationItems.map((item) => (
-            <li key={item.href}>
+            <li key={item.label}>
               <Link href={item.href}>{t(item.label)}</Link>
             </li>
           ))}

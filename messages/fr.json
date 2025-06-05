@@ -1,0 +1,42 @@
+{
+  "HomePage": {
+    "title": "Bienvenue sur le Portail d'Assurance",
+    "about": "À Propos",
+    "applyInsurance": "Demander une Assurance",
+    "yourApplications": "Vos Demandes",
+    "loadingForm": "Chargement du formulaire...",
+    "loadingApplications": "Chargement des demandes..."
+  },
+  "Navigation": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "services": "Services",
+    "contact": "Contact",
+    "faq": "FAQ"
+  },
+  "Footer": {
+    "copyright": "© 2025 Portail d'Assurance. Tous droits réservés."
+  },
+  "Metadata": {
+    "title": "Portail d'Assurance Intelligent",
+    "description": "Demandez une assurance et gérez vos demandes"
+  },
+  "InsuranceForm": {
+    "title": "Demander une Assurance",
+    "submit": "Soumettre la Demande",
+    "submitting": "Soumission en cours...",
+    "required": "Ce champ est obligatoire",
+    "selectPlaceholder": "Veuillez sélectionner une option",
+    "error": "Une erreur s'est produite lors de la soumission du formulaire",
+    "selectInsuranceType": "Veuillez sélectionner un type d'assurance pour continuer"
+  },
+  "SubmissionsList": {
+    "title": "Vos Demandes",
+    "columns": "Colonnes",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Page {page}",
+    "loading": "Chargement des demandes...",
+    "error": "Échec du chargement des demandes"
+  }
+}

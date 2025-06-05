@@ -2,6 +2,12 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 /**
  * Determines text direction based on locale
@@ -37,8 +43,9 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      dir={direction}>
-      <body className='antialiased min-h-screen'>
+      dir={direction}
+      className={inter.variable}>
+      <body className='antialiased min-h-screen font-sans'>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>

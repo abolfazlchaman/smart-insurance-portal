@@ -9,5 +9,26 @@
   },
   "Footer": {
     "copyright": "© 2025 Insurance Portal. All rights reserved."
+  },
+  "Metadata": {
+    "title": "Smart Insurance Portal",
+    "description": "Apply for insurance and manage your applications"
+  },
+  "InsuranceForm": {
+    "title": "Apply for Insurance",
+    "submit": "Submit Application",
+    "submitting": "Submitting...",
+    "required": "This field is required",
+    "selectPlaceholder": "Please select an option",
+    "error": "An error occurred while submitting the form"
+  },
+  "SubmissionsList": {
+    "title": "Your Applications",
+    "columns": "Columns",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {page}",
+    "loading": "Loading applications...",
+    "error": "Failed to load applications"
   }
 }

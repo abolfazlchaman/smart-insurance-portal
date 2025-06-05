@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { ThemeSwitcher } from './theme-switcher';
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
@@ -69,7 +70,8 @@ export function Navbar() {
           </li>
         </ul>
       </div>
-      <div className='navbar-end'>
+      <div className='navbar-end gap-2'>
+        <ThemeSwitcher />
         <div className='dropdown dropdown-end'>
           <div
             tabIndex={0}

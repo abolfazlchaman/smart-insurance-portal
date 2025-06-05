@@ -9,7 +9,10 @@
   },
   "Navigation": {
     "home": "Home",
-    "about": "About"
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "faq": "FAQ"
   },
   "Footer": {
     "copyright": "© 2025 Insurance Portal. All rights reserved."

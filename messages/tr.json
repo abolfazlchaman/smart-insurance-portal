@@ -9,7 +9,10 @@
   },
   "Navigation": {
     "home": "Ana Sayfa",
-    "about": "Hakkımızda"
+    "about": "Hakkımızda",
+    "services": "Hizmetler",
+    "contact": "İletişim",
+    "faq": "SSS"
   },
   "Footer": {
     "copyright": "© 2025 Sigorta Portalı. Tüm hakları saklıdır."

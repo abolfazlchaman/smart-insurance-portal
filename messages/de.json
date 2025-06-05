@@ -9,7 +9,10 @@
   },
   "Navigation": {
     "home": "Startseite",
-    "about": "Über uns"
+    "about": "Über uns",
+    "services": "Dienstleistungen",
+    "contact": "Kontakt",
+    "faq": "FAQ"
   },
   "Footer": {
     "copyright": "© 2025 Versicherungsportal. Alle Rechte vorbehalten."

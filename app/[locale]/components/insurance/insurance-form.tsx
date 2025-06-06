@@ -248,17 +248,21 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
 
         return (
           <div className='space-y-4'>
-            {field.fields.map((nestedField) => (
-              <div
-                key={nestedField.id}
-                className='form-control'>
-                <label className='label'>
-                  <span className='label-text text-wrap my-2'>{nestedField.label}</span>
-                  {nestedField.required && <span className='text-error'>*</span>}
-                </label>
-                {renderField(nestedField)}
-              </div>
-            ))}
+            {field.fields.map((nestedField) => {
+              if (!isFieldVisible(nestedField)) return null;
+
+              return (
+                <div
+                  key={nestedField.id}
+                  className='form-control'>
+                  <label className='label'>
+                    <span className='label-text text-wrap my-2'>{nestedField.label}</span>
+                    {nestedField.required && <span className='text-error'>*</span>}
+                  </label>
+                  {renderField(nestedField)}
+                </div>
+              );
+            })}
           </div>
         );
       default:
@@ -295,17 +299,21 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
           className='space-y-6'>
           <h2 className='text-2xl font-bold'>{selectedForm.title}</h2>
 
-          {selectedForm.fields.map((field) => (
-            <div
-              key={field.id}
-              className='form-control'>
-              <label className='label'>
-                <span className='label-text text-wrap my-2'>{field.label}</span>
-                {field.required && <span className='text-error'>*</span>}
-              </label>
-              {renderField(field)}
-            </div>
-          ))}
+          {selectedForm.fields.map((field) => {
+            if (!isFieldVisible(field)) return null;
+
+            return (
+              <div
+                key={field.id}
+                className='form-control'>
+                <label className='label'>
+                  <span className='label-text text-wrap my-2'>{field.label}</span>
+                  {field.required && <span className='text-error'>*</span>}
+                </label>
+                {renderField(field)}
+              </div>
+            );
+          })}
 
           {error && (
             <div className='alert alert-error'>

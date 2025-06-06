@@ -11,6 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "daisyui": "^5.0.43",
+    "lucide-react": "^0.513.0",
     "next": "15.3.3",
     "next-intl": "^4.1.0",
     "next-persian-fonts": "^1.0.0",

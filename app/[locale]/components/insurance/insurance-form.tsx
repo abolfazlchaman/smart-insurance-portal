@@ -60,7 +60,13 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
 
       // Check required fields
       const requiredFields = selectedForm.fields.filter(
-        (field) => field.required && isFieldVisible(field) && field.id !== 'has_safety_measures',
+        (field) =>
+          field.required &&
+          isFieldVisible(field) &&
+          field.id !== 'has_safety_measures' &&
+          field.id !== 'gender' &&
+          // Exclude health_info group from direct validation since it contains nested fields
+          field.id !== 'health_info',
       );
 
       const hasRequiredFields = requiredFields.every((field) => {
@@ -85,6 +91,18 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
         const safetyMeasures = ['smoke_detectors', 'fire_extinguishers', 'sprinkler_system'];
         const hasAtLeastOneMeasure = safetyMeasures.some((measure) => formData[measure] === true);
         if (!hasAtLeastOneMeasure) return false;
+      }
+
+      // Special validation for health insurance
+      if (selectedType === 'health') {
+        // Check if all required health info fields are filled
+        const healthInfoFields =
+          selectedForm.fields.find((f) => f.id === 'health_info')?.fields || [];
+        const hasAllHealthInfo = healthInfoFields.every((field) => {
+          if (!field.required || !isFieldVisible(field)) return true;
+          return formData[field.id] != null && formData[field.id] !== '';
+        });
+        if (!hasAllHealthInfo) return false;
       }
 
       return hasRequiredFields;
@@ -164,8 +182,20 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
       // Show success message
       showAlertMessage(t('success'));
 
-      // Force refresh the submissions list
-      window.location.reload();
+      // Dispatch custom event to refresh submissions list
+      const event = new CustomEvent('refresh-submissions', {
+        detail: {
+          newSubmission: {
+            id: data.id,
+            formId: data['Insurance Type'].toLowerCase().replace(' ', '_') + '_application',
+            data,
+            status: 'pending',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+        },
+      });
+      document.dispatchEvent(event);
     } catch (err) {
       showAlertMessage(err instanceof Error ? err.message : t('error'), 'error');
     } finally {
@@ -210,6 +240,73 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
 
   const renderField = (field: FormField) => {
     if (!isFieldVisible(field)) return null;
+
+    // Add notice for health insurance (no gender field)
+    if (selectedType === 'health' && field.id === 'health_info') {
+      return (
+        <div className='space-y-4'>
+          <div className='alert alert-warning'>
+            <Info className='h-4 w-4' />
+            <span>
+              Note: Gender selection is not provided by the backend form. As per assignment
+              requirements, this field will be set to N/A by default.
+            </span>
+          </div>
+          {field.fields?.map((nestedField) => {
+            if (!isFieldVisible(nestedField)) return null;
+            return (
+              <div
+                key={nestedField.id}
+                className='form-control'>
+                <label className='label'>
+                  <span className='label-text text-wrap my-2'>{nestedField.label}</span>
+                  {nestedField.required && <span className='text-error'>*</span>}
+                </label>
+                {renderField(nestedField)}
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
+    // Add notice for home insurance fire safety measures
+    if (selectedType === 'home' && field.id === 'fire_safety') {
+      return (
+        <div className='space-y-4'>
+          <div className='alert alert-info'>
+            <Info className='h-4 w-4' />
+            <span>
+              Note: Due as required in the Backend form structure, you must select all of the
+              following options to proceed to submission!
+            </span>
+          </div>
+          <div className='flex flex-row gap-2 flex-wrap max-w-full'>
+            {field.options?.map((option) => (
+              <label
+                key={option}
+                className='label cursor-pointer'>
+                <span className='label-text text-wrap my-2'>{option}</span>
+                <input
+                  type='checkbox'
+                  name={`${field.id}[]`}
+                  value={option}
+                  required={field.required}
+                  className='checkbox'
+                  onChange={(e) => {
+                    const currentValues = formData[field.id] || [];
+                    const newValues = e.target.checked
+                      ? [...currentValues, option]
+                      : currentValues.filter((v: string) => v !== option);
+                    handleInputChange(field.id, newValues);
+                  }}
+                />
+              </label>
+            ))}
+          </div>
+        </div>
+      );
+    }
 
     switch (field.type) {
       case 'text':
@@ -328,13 +425,17 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
           return null;
         }
 
-        // Special handling for home insurance gender selection
-        if (selectedType === 'home' && field.id === 'gender') {
+        // Special handling for health insurance gender selection
+        if (selectedType === 'health' && field.id === 'gender') {
           return (
             <div className='space-y-2'>
-              <p className='text-sm text-warning'>
-                Note: Gender selection is not provided by the server. This is a static field.
-              </p>
+              <div className='alert alert-warning'>
+                <Info className='h-4 w-4' />
+                <span>
+                  Note: Gender selection is not provided by the backend form. As per assignment
+                  requirements, this field will be set to N/A by default.
+                </span>
+              </div>
               <div className='flex flex-row gap-2 flex-wrap max-w-full'>
                 {field.options.map((option) => (
                   <label
@@ -382,9 +483,17 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
         }
 
         // Special handling for home insurance safety measures
-        if (field.id === 'has_safety_measures' && formData[field.id] === 'yes') {
+        if (field.id === 'has_safety_measures') {
           return (
             <div className='space-y-4'>
+              <div className='alert alert-info'>
+                <Info className='h-4 w-4' />
+                <span>
+                  Note: If you select "Yes" for having fire safety measures, you must select at
+                  least one of the following options: Smoke Detectors, Fire Extinguishers, or
+                  Sprinkler System.
+                </span>
+              </div>
               <div className='flex flex-row gap-2 flex-wrap max-w-full'>
                 {field.options.map((option) => (
                   <label
@@ -395,7 +504,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
                       type='checkbox'
                       name={`${field.id}[]`}
                       value={option}
-                      required={false} // Changed to false since only one is required
+                      required={false}
                       className='checkbox'
                       onChange={(e) => {
                         const currentValues = formData[field.id] || [];
@@ -408,9 +517,6 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
                   </label>
                 ))}
               </div>
-              <p className='text-sm text-info'>
-                Note: At least one safety measure must be selected when "Yes" is chosen.
-              </p>
             </div>
           );
         }

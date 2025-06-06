@@ -44,17 +44,60 @@ export function SubmissionsList() {
     loadSubmissions();
 
     // Add event listener for refresh
-    const handleRefresh = () => {
-      loadSubmissions();
+    const handleRefresh = (event: CustomEvent) => {
+      if (event.detail?.newSubmission) {
+        // Add the new submission to the list while maintaining current filters and sorting
+        setSubmissions((prev) => {
+          const newSubmissions = [...prev, event.detail.newSubmission];
+
+          // Apply search filter if exists
+          if (searchQuery) {
+            return newSubmissions.filter((submission) =>
+              Object.values(submission.data).some((value) =>
+                String(value).toLowerCase().includes(searchQuery.toLowerCase()),
+              ),
+            );
+          }
+
+          // Apply sorting if exists
+          if (config.sortBy) {
+            return newSubmissions.sort((a, b) => {
+              const aValue = a.data[config.sortBy as keyof typeof a.data] ?? '';
+              const bValue = b.data[config.sortBy as keyof typeof b.data] ?? '';
+
+              if (!isNaN(Number(aValue)) && !isNaN(Number(bValue))) {
+                return config.sortDirection === 'asc'
+                  ? Number(aValue) - Number(bValue)
+                  : Number(bValue) - Number(aValue);
+              }
+
+              const aDate = new Date(aValue);
+              const bDate = new Date(bValue);
+              if (!isNaN(aDate.getTime()) && !isNaN(bDate.getTime())) {
+                return config.sortDirection === 'asc'
+                  ? aDate.getTime() - bDate.getTime()
+                  : bDate.getTime() - aDate.getTime();
+              }
+
+              return config.sortDirection === 'asc'
+                ? String(aValue).localeCompare(String(bValue))
+                : String(bValue).localeCompare(String(aValue));
+            });
+          }
+
+          return newSubmissions;
+        });
+      } else {
+        loadSubmissions();
+      }
     };
 
-    const element = document.querySelector('[data-testid="submissions-list"]');
-    element?.addEventListener('refresh-submissions', handleRefresh);
+    document.addEventListener('refresh-submissions', handleRefresh as EventListener);
 
     return () => {
-      element?.removeEventListener('refresh-submissions', handleRefresh);
+      document.removeEventListener('refresh-submissions', handleRefresh as EventListener);
     };
-  }, [config]);
+  }, [config, searchQuery]);
 
   const loadSubmissions = async () => {
     try {
@@ -70,7 +113,45 @@ export function SubmissionsList() {
       const localSubmissions = localData ? JSON.parse(localData) : [];
 
       // Merge server and local data
-      const mergedData = [...serverResponse.data, ...localSubmissions];
+      let mergedData = [...serverResponse.data, ...localSubmissions];
+
+      // Apply search filter if exists
+      if (searchQuery) {
+        mergedData = mergedData.filter((submission) =>
+          Object.values(submission.data).some((value) =>
+            String(value).toLowerCase().includes(searchQuery.toLowerCase()),
+          ),
+        );
+      }
+
+      // Apply sorting if exists
+      if (config.sortBy) {
+        mergedData = mergedData.sort((a, b) => {
+          const aValue = a.data[config.sortBy as keyof typeof a.data] ?? '';
+          const bValue = b.data[config.sortBy as keyof typeof b.data] ?? '';
+
+          // Handle numeric values
+          if (!isNaN(Number(aValue)) && !isNaN(Number(bValue))) {
+            return config.sortDirection === 'asc'
+              ? Number(aValue) - Number(bValue)
+              : Number(bValue) - Number(aValue);
+          }
+
+          // Handle date values
+          const aDate = new Date(aValue);
+          const bDate = new Date(bValue);
+          if (!isNaN(aDate.getTime()) && !isNaN(bDate.getTime())) {
+            return config.sortDirection === 'asc'
+              ? aDate.getTime() - bDate.getTime()
+              : bDate.getTime() - aDate.getTime();
+          }
+
+          // Handle string values
+          return config.sortDirection === 'asc'
+            ? String(aValue).localeCompare(String(bValue))
+            : String(bValue).localeCompare(String(aValue));
+        });
+      }
 
       setSubmissions(mergedData);
       if (selectedColumns.length === 0) {

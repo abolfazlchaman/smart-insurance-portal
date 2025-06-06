@@ -28,7 +28,11 @@
     "required": "This field is required",
     "selectPlaceholder": "Please select an option",
     "error": "An error occurred while submitting the form",
-    "selectInsuranceType": "Please select an insurance type to continue"
+    "selectInsuranceType": "Please select an insurance type to continue",
+    "success": "Your insurance application has been submitted successfully!",
+    "stateSelectionNote": "Note: State selection requires country selection. API endpoint for states is not implemented.",
+    "noOptionsWarning": "No options provided for this field. Please contact support.",
+    "noNestedFieldsWarning": "No nested fields provided for this group. Please contact support."
   },
   "SubmissionsList": {
     "title": "Your Applications",
@@ -37,6 +41,33 @@
     "next": "Next",
     "page": "Page {page}",
     "loading": "Loading applications...",
-    "error": "Failed to load applications"
+    "error": "Failed to load applications",
+    "warningTooltip": "Click to learn more about local submissions",
+    "warningTitle": "Local Storage Notice",
+    "warningMessage": "Due to backend limitations, your submissions are stored locally in your browser. This means they will only be visible on this device and will be cleared if you clear your browser data. The server data shown is for demonstration purposes only.",
+    "close": "Close",
+    "search": "Search...",
+    "show": "Show",
+    "entries": "entries",
+    "actions": "Actions",
+    "confirmDeleteTitle": "Confirm Deletion",
+    "confirmDelete": "Are you sure you want to delete this submission? This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deleteSuccess": "Submission deleted successfully",
+    "editSuccess": "Submission edited successfully",
+    "noResults": "No results found",
+    "selectAll": "Select all",
+    "deselectAll": "Deselect all",
+    "selected": "{count} selected",
+    "deleteSelected": "Delete selected",
+    "editSelected": "Edit selected",
+    "sortAsc": "Sort ascending",
+    "sortDesc": "Sort descending",
+    "filter": "Filter",
+    "clearFilters": "Clear filters",
+    "localStorageWarning": "This submission is stored locally",
+    "serverData": "Server data",
+    "localData": "Local data"
   }
 }

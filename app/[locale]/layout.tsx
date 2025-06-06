@@ -34,7 +34,13 @@ export async function generateMetadata() {
 }
 
 export function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'de' }, { locale: 'fr' }, { locale: 'tr' }, { locale: 'fa' }];
+  return [
+    { locale: 'en' },
+    { locale: 'de' },
+    { locale: 'fr' },
+    { locale: 'tr' },
+    { locale: 'fa' },
+  ];
 }
 
 export default async function LocaleLayout({
@@ -58,52 +64,36 @@ export default async function LocaleLayout({
   const fontClassName = locale === 'fa' ? vazirMatn.className : inter.className;
 
   return (
-    <html
-      lang={locale}
-      dir={direction}
-      suppressHydrationWarning>
+    <html lang={locale} dir={direction} suppressHydrationWarning>
       <head>
         <title>{metadata.title}</title>
-        <meta
-          name='description'
-          content={metadata.description}
+        <meta name="description" content={metadata.description} />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
         />
         <link
-          rel='apple-touch-icon'
-          sizes='180x180'
-          href='/apple-touch-icon.png'
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
         />
         <link
-          rel='icon'
-          type='image/png'
-          sizes='32x32'
-          href='/favicon-32x32.png'
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
         />
-        <link
-          rel='icon'
-          type='image/png'
-          sizes='16x16'
-          href='/favicon-16x16.png'
-        />
-        <link
-          rel='manifest'
-          href='/site.webmanifest'
-        />
-        <meta
-          name='theme-color'
-          content='#ffffff'
-        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={`${fontClassName} antialiased`}>
-        <ThemeProvider
-          attribute='data-theme'
-          defaultTheme='light'>
-          <NextIntlClientProvider
-            locale={locale}
-            messages={messages}>
-            <div className='min-h-screen flex flex-col'>
+        <ThemeProvider attribute="data-theme" defaultTheme="light">
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <div className="min-h-screen flex flex-col">
               <Navbar />
-              <main className='flex-grow'>{children}</main>
+              <main className="flex-grow">{children}</main>
               <Footer />
               <AssignmentBanner />
             </div>

@@ -3,9 +3,9 @@
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black)](https://insurance-devotel.vercel.app/)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/abolfazlchaman/smart-insurance-portal)
 
->[Live Demo](https://insurance-devotel.vercel.app/)
+> [Live Demo](https://insurance-devotel.vercel.app/)
 
->[Github](https://github.com/abolfazlchaman/smart-insurance-portal)
+> [Github](https://github.com/abolfazlchaman/smart-insurance-portal)
 
 A modern insurance portal built with Next.js 15, React 19, and TypeScript, featuring internationalization support and a clean, accessible UI.
 
@@ -31,27 +31,32 @@ A modern insurance portal built with Next.js 15, React 19, and TypeScript, featu
 ## Setup Instructions
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/abolfazlchaman/smart-insurance-portal.git
 cd smart-insurance-portal
 ```
 
 2. Install dependencies using pnpm:
+
 ```bash
 pnpm install
 ```
 
 3. Run the development server:
+
 ```bash
 pnpm dev
 ```
 
 4. Build for production:
+
 ```bash
 pnpm build
 ```
 
 5. Start production server:
+
 ```bash
 pnpm start
 ```
@@ -87,13 +92,14 @@ const submissions = await fetchSubmissions({
   page: 1,
   pageSize: 10,
   sortBy: 'createdAt',
-  sortDirection: 'desc'
+  sortDirection: 'desc',
 });
 ```
 
 ## Internationalization
 
 The application supports multiple languages:
+
 - English (en)
 - French (fr)
 - German (de)
@@ -135,11 +141,13 @@ Language files are located in the `messages` directory.
 ## Testing
 
 Run tests using:
+
 ```bash
 pnpm test
 ```
 
 Watch mode:
+
 ```bash
 pnpm test:watch
 ```

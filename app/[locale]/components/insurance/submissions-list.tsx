@@ -246,9 +246,12 @@ export function SubmissionsList() {
     });
   };
 
-  // typescript ignore for unused type
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const showSuccessAlert = (message: string, type: 'success' | 'error' = 'success') => {
+  const showSuccessAlert = (
+    message: string,
+    // typescript ignore for unused type
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    type: 'success' | 'error' = 'success',
+  ) => {
     setAlertMessage(message);
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000);

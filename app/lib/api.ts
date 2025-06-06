@@ -1,4 +1,8 @@
-import { InsuranceForm, InsuranceSubmission, ListViewConfig } from '../types/insurance';
+import {
+  InsuranceForm,
+  InsuranceSubmission,
+  ListViewConfig,
+} from '../types/insurance';
 
 const BASE_URL = 'https://assignment.devotel.io';
 
@@ -10,7 +14,9 @@ export async function fetchInsuranceForms(): Promise<InsuranceForm[]> {
   return response.json();
 }
 
-export async function submitInsuranceForm(formData: Record<string, any>): Promise<InsuranceSubmission> {
+export async function submitInsuranceForm(
+  formData: Record<string, any>,
+): Promise<InsuranceSubmission> {
   const response = await fetch(`${BASE_URL}/api/insurance/forms/submit`, {
     method: 'POST',
     headers: {
@@ -18,7 +24,7 @@ export async function submitInsuranceForm(formData: Record<string, any>): Promis
     },
     body: JSON.stringify(formData),
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to submit insurance form');
   }
@@ -26,7 +32,9 @@ export async function submitInsuranceForm(formData: Record<string, any>): Promis
   // Return a transformed response that matches our InsuranceSubmission type
   return {
     id: formData.id,
-    formId: formData['Insurance Type'].toLowerCase().replace(' ', '_') + '_application',
+    formId:
+      formData['Insurance Type'].toLowerCase().replace(' ', '_') +
+      '_application',
     data: formData,
     status: 'pending',
     createdAt: new Date().toISOString(),
@@ -47,7 +55,9 @@ export async function fetchSubmissions(config: ListViewConfig): Promise<{
     ...(config.filters && { filters: JSON.stringify(config.filters) }),
   });
 
-  const response = await fetch(`${BASE_URL}/api/insurance/forms/submissions?${queryParams}`);
+  const response = await fetch(
+    `${BASE_URL}/api/insurance/forms/submissions?${queryParams}`,
+  );
   if (!response.ok) {
     throw new Error('Failed to fetch submissions');
   }
@@ -56,7 +66,9 @@ export async function fetchSubmissions(config: ListViewConfig): Promise<{
   // Transform the data to match our InsuranceSubmission type
   const transformedData = result.data.map((item: any) => ({
     id: item.id,
-    formId: item['Insurance Type']?.toLowerCase().replace(' ', '_') + '_application' || 'unknown',
+    formId:
+      item['Insurance Type']?.toLowerCase().replace(' ', '_') +
+        '_application' || 'unknown',
     data: item,
     status: 'pending',
     createdAt: new Date().toISOString(),
@@ -82,4 +94,4 @@ export async function fetchStates(country: string): Promise<string[]> {
   }
   const data: StatesResponse = await response.json();
   return data.states;
-} 
+}

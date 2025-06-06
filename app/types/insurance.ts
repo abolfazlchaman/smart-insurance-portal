@@ -72,4 +72,4 @@ export interface ListViewConfig {
   filters?: Record<string, any>;
   page: number;
   pageSize: number;
-} 
+}

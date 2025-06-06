@@ -3,7 +3,8 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Devotel Smart Insurance Portal',
-  description: 'An evaluation project for Devotel by Abolfazl Chaman @ abolfazlchaman.com',
+  description:
+    'An evaluation project for Devotel by Abolfazl Chaman @ abolfazlchaman.com',
 };
 
 export default function RootLayout({

@@ -16,4 +16,4 @@ export type Locale = keyof typeof messages;
 
 export function getMessages(locale: Locale) {
   return messages[locale];
-} 
+}

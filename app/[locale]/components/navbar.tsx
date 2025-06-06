@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { ThemeSwitcher } from './theme-switcher';
-import { useState } from 'react';
+import { useTheme } from 'next-themes';
+import { useState, useEffect } from 'react';
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
@@ -28,6 +28,12 @@ export function Navbar() {
   const pathname = usePathname();
   const currentLocale = useLocale();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Remove the current locale from the pathname
   const pathnameWithoutLocale = pathname.replace(`/${currentLocale}`, '') || '/';
@@ -37,6 +43,31 @@ export function Navbar() {
     // Prevent scrolling when menu is open
     document.body.style.overflow = !isMenuOpen ? 'hidden' : 'auto';
   };
+
+  // Show skeleton buttons until mounted
+  if (!mounted) {
+    return (
+      <div className='navbar bg-base-100 max-w-full'>
+        <div className='navbar-start max-lg:w-full justify-between'>
+          <div className='btn btn-ghost lg:hidden'>
+            <div className='skeleton h-5 w-5'></div>
+          </div>
+          <div className='btn btn-ghost text-xl italic font-bold whitespace-nowrap'>
+            <div className='skeleton h-6 w-32'></div>
+          </div>
+        </div>
+        <div className='navbar-end gap-2 hidden lg:flex'>
+          <div className='btn btn-ghost btn-circle'>
+            <div className='skeleton h-5 w-5 rounded-full'></div>
+          </div>
+          <div className='btn btn-ghost whitespace-nowrap gap-2'>
+            <div className='skeleton h-5 w-5 rounded-full'></div>
+            <div className='skeleton h-4 w-16'></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='navbar bg-base-100 max-w-full'>
@@ -113,7 +144,138 @@ export function Navbar() {
 
           {/* Theme and Language switchers */}
           <div className='p-8 flex flex-col items-center space-y-4'>
-            <ThemeSwitcher />
+            <div className='dropdown dropdown-top'>
+              <div
+                tabIndex={0}
+                role='button'
+                className='btn btn-ghost btn-circle'>
+                {resolvedTheme === 'light' ? (
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-5 w-5'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'>
+                    <circle
+                      cx='12'
+                      cy='12'
+                      r='4'
+                    />
+                    <path d='M12 2v2' />
+                    <path d='M12 20v2' />
+                    <path d='m4.93 4.93 1.41 1.41' />
+                    <path d='m17.66 17.66 1.41 1.41' />
+                    <path d='M2 12h2' />
+                    <path d='M20 12h2' />
+                    <path d='m6.34 17.66-1.41 1.41' />
+                    <path d='m19.07 4.93-1.41 1.41' />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-5 w-5'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'>
+                    <path d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z' />
+                  </svg>
+                )}
+              </div>
+              <ul
+                tabIndex={0}
+                className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52'>
+                <li>
+                  <button
+                    onClick={() => setTheme('light')}
+                    className='flex items-center gap-2'>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-5 w-5'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'>
+                      <circle
+                        cx='12'
+                        cy='12'
+                        r='4'
+                      />
+                      <path d='M12 2v2' />
+                      <path d='M12 20v2' />
+                      <path d='m4.93 4.93 1.41 1.41' />
+                      <path d='m17.66 17.66 1.41 1.41' />
+                      <path d='M2 12h2' />
+                      <path d='M20 12h2' />
+                      <path d='m6.34 17.66-1.41 1.41' />
+                      <path d='m19.07 4.93-1.41 1.41' />
+                    </svg>
+                    Light
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => setTheme('dark')}
+                    className='flex items-center gap-2'>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-5 w-5'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'>
+                      <path d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z' />
+                    </svg>
+                    Dark
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => setTheme('system')}
+                    className='flex items-center gap-2'>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-5 w-5'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'>
+                      <rect
+                        width='20'
+                        height='14'
+                        x='2'
+                        y='3'
+                        rx='2'
+                      />
+                      <line
+                        x1='8'
+                        x2='16'
+                        y1='21'
+                        y2='21'
+                      />
+                      <line
+                        x1='12'
+                        x2='12'
+                        y1='17'
+                        y2='21'
+                      />
+                    </svg>
+                    System
+                  </button>
+                </li>
+              </ul>
+            </div>
             <div className='dropdown dropdown-top'>
               <div
                 tabIndex={0}
@@ -172,7 +334,138 @@ export function Navbar() {
 
       {/* Desktop theme and language switchers */}
       <div className='navbar-end gap-2 hidden lg:flex'>
-        <ThemeSwitcher />
+        <div className='dropdown dropdown-end'>
+          <div
+            tabIndex={0}
+            role='button'
+            className='btn btn-ghost btn-circle'>
+            {resolvedTheme === 'light' ? (
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='h-5 w-5'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'>
+                <circle
+                  cx='12'
+                  cy='12'
+                  r='4'
+                />
+                <path d='M12 2v2' />
+                <path d='M12 20v2' />
+                <path d='m4.93 4.93 1.41 1.41' />
+                <path d='m17.66 17.66 1.41 1.41' />
+                <path d='M2 12h2' />
+                <path d='M20 12h2' />
+                <path d='m6.34 17.66-1.41 1.41' />
+                <path d='m19.07 4.93-1.41 1.41' />
+              </svg>
+            ) : (
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='h-5 w-5'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'>
+                <path d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z' />
+              </svg>
+            )}
+          </div>
+          <ul
+            tabIndex={0}
+            className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52'>
+            <li>
+              <button
+                onClick={() => setTheme('light')}
+                className='flex items-center gap-2'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-5 w-5'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'>
+                  <circle
+                    cx='12'
+                    cy='12'
+                    r='4'
+                  />
+                  <path d='M12 2v2' />
+                  <path d='M12 20v2' />
+                  <path d='m4.93 4.93 1.41 1.41' />
+                  <path d='m17.66 17.66 1.41 1.41' />
+                  <path d='M2 12h2' />
+                  <path d='M20 12h2' />
+                  <path d='m6.34 17.66-1.41 1.41' />
+                  <path d='m19.07 4.93-1.41 1.41' />
+                </svg>
+                Light
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => setTheme('dark')}
+                className='flex items-center gap-2'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-5 w-5'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'>
+                  <path d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z' />
+                </svg>
+                Dark
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => setTheme('system')}
+                className='flex items-center gap-2'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-5 w-5'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'>
+                  <rect
+                    width='20'
+                    height='14'
+                    x='2'
+                    y='3'
+                    rx='2'
+                  />
+                  <line
+                    x1='8'
+                    x2='16'
+                    y1='21'
+                    y2='21'
+                  />
+                  <line
+                    x1='12'
+                    x2='12'
+                    y1='17'
+                    y2='21'
+                  />
+                </svg>
+                System
+              </button>
+            </li>
+          </ul>
+        </div>
         <div className='dropdown dropdown-end'>
           <div
             tabIndex={0}

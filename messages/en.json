@@ -1,6 +1,6 @@
 {
   "HomePage": {
-    "title": "Welcome to Insurance Portal",
+    "title": "Welcome to the Insurance Portal",
     "about": "About Us",
     "applyInsurance": "Apply for Insurance",
     "yourApplications": "Your Applications",
@@ -29,10 +29,8 @@
     "selectPlaceholder": "Please select an option",
     "error": "An error occurred while submitting the form",
     "selectInsuranceType": "Please select an insurance type to continue",
-    "success": "Your insurance application has been submitted successfully!",
-    "stateSelectionNote": "Note: State selection requires country selection. API endpoint for states is not implemented.",
-    "noOptionsWarning": "No options provided for this field. Please contact support.",
-    "noNestedFieldsWarning": "No nested fields provided for this group. Please contact support."
+    "success": "Application submitted successfully",
+    "stateSelectionNote": "Note: State selection is not required for home insurance"
   },
   "SubmissionsList": {
     "title": "Your Applications",
@@ -69,5 +67,9 @@
     "localStorageWarning": "This submission is stored locally",
     "serverData": "Server data",
     "localData": "Local data"
+  },
+  "AssignmentBanner": {
+    "message": "This is an assignment project. All rights reserved for the Devotel Team. Assignment developed by",
+    "developer": "Abolfazl Chaman"
   }
 }

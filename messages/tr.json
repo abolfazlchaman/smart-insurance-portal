@@ -28,7 +28,9 @@
     "required": "Bu alan zorunludur",
     "selectPlaceholder": "Lütfen bir seçenek seçin",
     "error": "Form gönderilirken hata oluştu",
-    "selectInsuranceType": "Lütfen devam etmek için bir sigorta türü seçin"
+    "selectInsuranceType": "Lütfen devam etmek için bir sigorta türü seçin",
+    "success": "Başvuru başarıyla gönderildi",
+    "stateSelectionNote": "Not: Konut sigortası için il seçimi gerekli değildir"
   },
   "SubmissionsList": {
     "title": "Başvurularınız",
@@ -37,6 +39,37 @@
     "next": "Sonraki",
     "page": "Sayfa {page}",
     "loading": "Başvurular yükleniyor...",
-    "error": "Başvurular yüklenirken hata oluştu"
+    "error": "Başvurular yüklenirken hata oluştu",
+    "warningTooltip": "Yerel başvurular hakkında daha fazla bilgi için tıklayın",
+    "warningTitle": "Yerel Depolama Uyarısı",
+    "warningMessage": "Backend sınırlamaları nedeniyle, başvurularınız tarayıcınızda yerel olarak saklanmaktadır. Bu, yalnızca bu cihazda görülebilecekleri ve tarayıcı verilerinizi temizlediğinizde silinecekleri anlamına gelir. Gösterilen sunucu verileri yalnızca gösterim amaçlıdır.",
+    "close": "Kapat",
+    "search": "Ara...",
+    "show": "Göster",
+    "entries": "kayıt",
+    "actions": "İşlemler",
+    "confirmDeleteTitle": "Silme Onayı",
+    "confirmDelete": "Bu başvuruyu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "deleteSuccess": "Başvuru başarıyla silindi",
+    "editSuccess": "Başvuru başarıyla düzenlendi",
+    "noResults": "Sonuç bulunamadı",
+    "selectAll": "Tümünü seç",
+    "deselectAll": "Tümünü kaldır",
+    "selected": "{count} seçili",
+    "deleteSelected": "Seçilenleri sil",
+    "editSelected": "Seçilenleri düzenle",
+    "sortAsc": "Artan sırala",
+    "sortDesc": "Azalan sırala",
+    "filter": "Filtrele",
+    "clearFilters": "Filtreleri temizle",
+    "localStorageWarning": "Bu başvuru yerel olarak saklanıyor",
+    "serverData": "Sunucu verisi",
+    "localData": "Yerel veri"
+  },
+  "AssignmentBanner": {
+    "message": "Bu bir ödev projesidir. Tüm hakları Devotel Ekibi'ne aittir. Ödev geliştiricisi",
+    "developer": "Abolfazl Chaman"
   }
 }

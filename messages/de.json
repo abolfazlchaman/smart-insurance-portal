@@ -28,7 +28,9 @@
     "required": "Dieses Feld ist erforderlich",
     "selectPlaceholder": "Bitte wählen Sie eine Option",
     "error": "Fehler beim Einreichen des Formulars",
-    "selectInsuranceType": "Bitte wählen Sie einen Versicherungstyp aus"
+    "selectInsuranceType": "Bitte wählen Sie einen Versicherungstyp aus",
+    "success": "Antrag erfolgreich eingereicht",
+    "stateSelectionNote": "Hinweis: Bundeslandauswahl ist für Hausratversicherung nicht erforderlich"
   },
   "SubmissionsList": {
     "title": "Ihre Anträge",
@@ -37,6 +39,37 @@
     "next": "Weiter",
     "page": "Seite {page}",
     "loading": "Anträge werden geladen...",
-    "error": "Fehler beim Laden der Anträge"
+    "error": "Fehler beim Laden der Anträge",
+    "warningTooltip": "Klicken Sie, um mehr über lokale Anträge zu erfahren",
+    "warningTitle": "Lokaler Speicher Hinweis",
+    "warningMessage": "Aufgrund von Backend-Einschränkungen werden Ihre Anträge lokal in Ihrem Browser gespeichert. Dies bedeutet, dass sie nur auf diesem Gerät sichtbar sind und gelöscht werden, wenn Sie Ihre Browserdaten löschen. Die angezeigten Serverdaten dienen nur zu Demonstrationszwecken.",
+    "close": "Schließen",
+    "search": "Suchen...",
+    "show": "Anzeigen",
+    "entries": "Einträge",
+    "actions": "Aktionen",
+    "confirmDeleteTitle": "Löschen bestätigen",
+    "confirmDelete": "Sind Sie sicher, dass Sie diesen Antrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "deleteSuccess": "Antrag erfolgreich gelöscht",
+    "editSuccess": "Antrag erfolgreich bearbeitet",
+    "noResults": "Keine Ergebnisse gefunden",
+    "selectAll": "Alle auswählen",
+    "deselectAll": "Alle abwählen",
+    "selected": "{count} ausgewählt",
+    "deleteSelected": "Ausgewählte löschen",
+    "editSelected": "Ausgewählte bearbeiten",
+    "sortAsc": "Aufsteigend sortieren",
+    "sortDesc": "Absteigend sortieren",
+    "filter": "Filtern",
+    "clearFilters": "Filter zurücksetzen",
+    "localStorageWarning": "Dieser Antrag wird lokal gespeichert",
+    "serverData": "Serverdaten",
+    "localData": "Lokale Daten"
+  },
+  "AssignmentBanner": {
+    "message": "Dies ist ein Projektauftrag. Alle Rechte vorbehalten für das Devotel Team. Auftrag entwickelt von",
+    "developer": "Abolfazl Chaman"
   }
 }

@@ -7,6 +7,8 @@ import { Inter } from 'next/font/google';
 import { getTranslations } from 'next-intl/server';
 import { getMessages, type Locale } from '@/app/lib/messages';
 import '../globals.css';
+import { AssignmentBanner } from './components/assignment-banner';
+import { notFound } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,6 +33,10 @@ export async function generateMetadata() {
   };
 }
 
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'de' }, { locale: 'fr' }, { locale: 'tr' }, { locale: 'fa' }];
+}
+
 export default async function LocaleLayout({
   children,
   params,
@@ -40,7 +46,12 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   const direction = getDirection(locale);
-  const messages = getMessages(locale as Locale);
+  let messages;
+  try {
+    messages = await getMessages(locale as Locale);
+  } catch (error) {
+    notFound();
+  }
   const metadata = await generateMetadata();
 
   // Determine which font to use based on locale
@@ -69,6 +80,7 @@ export default async function LocaleLayout({
               <Navbar />
               <main className='flex-grow'>{children}</main>
               <Footer />
+              <AssignmentBanner />
             </div>
           </NextIntlClientProvider>
         </ThemeProvider>

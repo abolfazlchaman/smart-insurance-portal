@@ -28,7 +28,9 @@
     "required": "Ce champ est obligatoire",
     "selectPlaceholder": "Veuillez sélectionner une option",
     "error": "Une erreur s'est produite lors de la soumission du formulaire",
-    "selectInsuranceType": "Veuillez sélectionner un type d'assurance pour continuer"
+    "selectInsuranceType": "Veuillez sélectionner un type d'assurance pour continuer",
+    "success": "Demande soumise avec succès",
+    "stateSelectionNote": "Note : La sélection de l'état n'est pas requise pour l'assurance habitation"
   },
   "SubmissionsList": {
     "title": "Vos Demandes",
@@ -37,6 +39,37 @@
     "next": "Suivant",
     "page": "Page {page}",
     "loading": "Chargement des demandes...",
-    "error": "Échec du chargement des demandes"
+    "error": "Échec du chargement des demandes",
+    "warningTooltip": "Cliquez pour en savoir plus sur les soumissions locales",
+    "warningTitle": "Avis de Stockage Local",
+    "warningMessage": "En raison des limitations du backend, vos soumissions sont stockées localement dans votre navigateur. Cela signifie qu'elles ne seront visibles que sur cet appareil et seront effacées si vous effacez les données de votre navigateur. Les données du serveur affichées sont à des fins de démonstration uniquement.",
+    "close": "Fermer",
+    "search": "Rechercher...",
+    "show": "Afficher",
+    "entries": "entrées",
+    "actions": "Actions",
+    "confirmDeleteTitle": "Confirmer la Suppression",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette demande ? Cette action ne peut pas être annulée.",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "deleteSuccess": "Demande supprimée avec succès",
+    "editSuccess": "Demande modifiée avec succès",
+    "noResults": "Aucun résultat trouvé",
+    "selectAll": "Tout sélectionner",
+    "deselectAll": "Tout désélectionner",
+    "selected": "{count} sélectionné",
+    "deleteSelected": "Supprimer la sélection",
+    "editSelected": "Modifier la sélection",
+    "sortAsc": "Trier par ordre croissant",
+    "sortDesc": "Trier par ordre décroissant",
+    "filter": "Filtrer",
+    "clearFilters": "Effacer les filtres",
+    "localStorageWarning": "Cette demande est stockée localement",
+    "serverData": "Données serveur",
+    "localData": "Données locales"
+  },
+  "AssignmentBanner": {
+    "message": "Ceci est un projet d'assignation. Tous droits réservés pour l'équipe Devotel. Projet développé par",
+    "developer": "Abolfazl Chaman"
   }
 }

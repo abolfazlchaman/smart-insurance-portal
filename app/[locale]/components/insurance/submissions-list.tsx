@@ -26,6 +26,7 @@ const DEFAULT_PAGE_SIZE = 5;
 export function SubmissionsList() {
   const t = useTranslations('SubmissionsList');
   const [isLoading, setIsLoading] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [submissions, setSubmissions] = useState<TransformedSubmission[]>([]);
   const [columns, setColumns] = useState<string[]>([]);
@@ -101,7 +102,9 @@ export function SubmissionsList() {
 
   const loadSubmissions = async () => {
     try {
-      setIsLoading(true);
+      if (isInitialLoad) {
+        setIsLoading(true);
+      }
       setError(null);
 
       // Get server data
@@ -161,7 +164,10 @@ export function SubmissionsList() {
       setError(err instanceof Error ? err.message : t('error'));
       showSuccessAlert(t('error'), 'error');
     } finally {
-      setIsLoading(false);
+      if (isInitialLoad) {
+        setIsLoading(false);
+        setIsInitialLoad(false);
+      }
     }
   };
 

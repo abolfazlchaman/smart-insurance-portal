@@ -247,10 +247,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
         <div className='space-y-4'>
           <div className='alert alert-warning'>
             <Info className='h-4 w-4' />
-            <span>
-              Note: Gender selection is not provided by the backend form. As per assignment
-              requirements, this field will be set to N/A by default.
-            </span>
+            <span>{t('genderNote')}</span>
           </div>
           {field.fields?.map((nestedField) => {
             if (!isFieldVisible(nestedField)) return null;
@@ -276,10 +273,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
         <div className='space-y-4'>
           <div className='alert alert-info'>
             <Info className='h-4 w-4' />
-            <span>
-              Note: Due as required in the Backend form structure, you must select all of the
-              following options to proceed to submission!
-            </span>
+            <div className='text-sm text-gray-500 mt-1'>{t('fireSafetyNote')}</div>
           </div>
           <div className='flex flex-row gap-2 flex-wrap max-w-full'>
             {field.options?.map((option) => (
@@ -431,10 +425,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
             <div className='space-y-2'>
               <div className='alert alert-warning'>
                 <Info className='h-4 w-4' />
-                <span>
-                  Note: Gender selection is not provided by the backend form. As per assignment
-                  requirements, this field will be set to N/A by default.
-                </span>
+                <div className='text-sm text-gray-500 mt-1'>{t('genderNote')}</div>
               </div>
               <div className='flex flex-row gap-2 flex-wrap max-w-full'>
                 {field.options.map((option) => (
@@ -488,11 +479,7 @@ export function InsuranceForm({ forms }: InsuranceFormProps) {
             <div className='space-y-4'>
               <div className='alert alert-info'>
                 <Info className='h-4 w-4' />
-                <span>
-                  Note: If you select "Yes" for having fire safety measures, you must select at
-                  least one of the following options: Smoke Detectors, Fire Extinguishers, or
-                  Sprinkler System.
-                </span>
+                <div className='text-sm text-gray-500 mt-1'>{t('requiredOptionsNote')}</div>
               </div>
               <div className='flex flex-row gap-2 flex-wrap max-w-full'>
                 {field.options.map((option) => (

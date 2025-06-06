@@ -27,10 +27,13 @@
     "submitting": "Wird eingereicht...",
     "required": "Dieses Feld ist erforderlich",
     "selectPlaceholder": "Bitte wählen Sie eine Option",
-    "error": "Fehler beim Einreichen des Formulars",
-    "selectInsuranceType": "Bitte wählen Sie einen Versicherungstyp aus",
+    "error": "Bei der Übermittlung des Formulars ist ein Fehler aufgetreten",
+    "selectInsuranceType": "Bitte wählen Sie einen Versicherungstyp, um fortzufahren",
     "success": "Antrag erfolgreich eingereicht",
-    "stateSelectionNote": "Hinweis: Bundeslandauswahl ist für Hausratversicherung nicht erforderlich"
+    "stateSelectionNote": "Hinweis: Die Bundeslandauswahl ist für die Hausratversicherung nicht erforderlich",
+    "fireSafetyNote": "Hinweis: Wenn Sie \"Ja\" für Brandschutzmaßnahmen auswählen, müssen Sie mindestens eine der folgenden Optionen auswählen: Rauchmelder, Feuerlöscher oder Sprinkleranlage.",
+    "genderNote": "Hinweis: Die Geschlechtsauswahl wird vom Backend-Formular nicht bereitgestellt. Gemäß den Aufgabenanforderungen wird dieses Feld standardmäßig auf N/A gesetzt.",
+    "requiredOptionsNote": "Hinweis: Wie im Backend-Formular erforderlich, müssen Sie alle folgenden Optionen auswählen, um mit der Einreichung fortzufahren!"
   },
   "SubmissionsList": {
     "title": "Ihre Anträge",

@@ -22,15 +22,18 @@
     "description": "Demandez une assurance et gérez vos demandes"
   },
   "InsuranceForm": {
-    "title": "Demander une Assurance",
-    "submit": "Soumettre la Demande",
+    "title": "Demande d'assurance",
+    "submit": "Soumettre la demande",
     "submitting": "Soumission en cours...",
     "required": "Ce champ est obligatoire",
     "selectPlaceholder": "Veuillez sélectionner une option",
     "error": "Une erreur s'est produite lors de la soumission du formulaire",
     "selectInsuranceType": "Veuillez sélectionner un type d'assurance pour continuer",
     "success": "Demande soumise avec succès",
-    "stateSelectionNote": "Note : La sélection de l'état n'est pas requise pour l'assurance habitation"
+    "stateSelectionNote": "Note : La sélection de l'état n'est pas requise pour l'assurance habitation",
+    "fireSafetyNote": "Note : Si vous sélectionnez \"Oui\" pour les mesures de sécurité incendie, vous devez sélectionner au moins une des options suivantes : Détecteurs de fumée, Extincteurs ou Système d'extinction automatique.",
+    "genderNote": "Note : La sélection du genre n'est pas fournie par le formulaire backend. Conformément aux exigences de l'assignation, ce champ sera défini par défaut sur N/A.",
+    "requiredOptionsNote": "Note : Comme requis dans la structure du formulaire backend, vous devez sélectionner toutes les options suivantes pour procéder à la soumission !"
   },
   "SubmissionsList": {
     "title": "Vos Demandes",

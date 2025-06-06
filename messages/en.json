@@ -30,7 +30,10 @@
     "error": "An error occurred while submitting the form",
     "selectInsuranceType": "Please select an insurance type to continue",
     "success": "Application submitted successfully",
-    "stateSelectionNote": "Note: State selection is not required for home insurance"
+    "stateSelectionNote": "Note: State selection is not required for home insurance",
+    "fireSafetyNote": "Note: If you select \"Yes\" for having fire safety measures, you must select at least one of the following options: Smoke Detectors, Fire Extinguishers, or Sprinkler System.",
+    "genderNote": "Note: Gender selection is not provided by the backend form. As per assignment requirements, this field will be set to N/A by default.",
+    "requiredOptionsNote": "Note: Due as required in the Backend form structure, you must select all of the following options to proceed to submission!"
   },
   "SubmissionsList": {
     "title": "Your Applications",

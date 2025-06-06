@@ -27,10 +27,13 @@
     "submitting": "Gönderiliyor...",
     "required": "Bu alan zorunludur",
     "selectPlaceholder": "Lütfen bir seçenek seçin",
-    "error": "Form gönderilirken hata oluştu",
-    "selectInsuranceType": "Lütfen devam etmek için bir sigorta türü seçin",
+    "error": "Form gönderilirken bir hata oluştu",
+    "selectInsuranceType": "Devam etmek için lütfen bir sigorta türü seçin",
     "success": "Başvuru başarıyla gönderildi",
-    "stateSelectionNote": "Not: Konut sigortası için il seçimi gerekli değildir"
+    "stateSelectionNote": "Not: Ev sigortası için eyalet seçimi gerekli değildir",
+    "fireSafetyNote": "Not: Yangın güvenlik önlemleriniz olduğunu \"Evet\" olarak seçerseniz, aşağıdaki seçeneklerden en az birini seçmelisiniz: Duman Dedektörleri, Yangın Söndürücüler veya Sprinkler Sistemi.",
+    "genderNote": "Not: Cinsiyet seçimi backend formu tarafından sağlanmamaktadır. Ödev gereksinimleri gereği, bu alan varsayılan olarak N/A olarak ayarlanacaktır.",
+    "requiredOptionsNote": "Not: Backend form yapısında gerekli olduğu gibi, başvuruya devam etmek için aşağıdaki tüm seçenekleri seçmelisiniz!"
   },
   "SubmissionsList": {
     "title": "Başvurularınız",

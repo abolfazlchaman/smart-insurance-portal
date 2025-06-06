@@ -50,7 +50,7 @@ export default async function LocaleLayout({
   try {
     messages = await getMessages(locale as Locale);
   } catch (error) {
-    notFound();
+    if (error) notFound();
   }
   const metadata = await generateMetadata();
 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { InsuranceSubmission, ListViewConfig, TransformedSubmission } from '@/app/types/insurance';
+import { ListViewConfig, TransformedSubmission } from '@/app/types/insurance';
 import { fetchSubmissions } from '@/app/lib/api';
 import { SubmissionsSkeleton } from './submissions-skeleton';
 import { SubmissionWarning } from './submission-warning';
@@ -240,6 +240,8 @@ export function SubmissionsList() {
     });
   };
 
+  // typescript ignore for unused type
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const showSuccessAlert = (message: string, type: 'success' | 'error' = 'success') => {
     setAlertMessage(message);
     setShowAlert(true);
@@ -265,6 +267,8 @@ export function SubmissionsList() {
     }
   };
 
+  // typescript ignore for unused type
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleEdit = (id: string) => {
     showSuccessAlert(t('editSuccess'));
   };

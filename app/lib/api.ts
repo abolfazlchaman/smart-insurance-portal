@@ -22,7 +22,16 @@ export async function submitInsuranceForm(formData: Record<string, any>): Promis
   if (!response.ok) {
     throw new Error('Failed to submit insurance form');
   }
-  return response.json();
+
+  // Return a transformed response that matches our InsuranceSubmission type
+  return {
+    id: formData.id,
+    formId: formData['Insurance Type'].toLowerCase().replace(' ', '_') + '_application',
+    data: formData,
+    status: 'pending',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
 }
 
 export async function fetchSubmissions(config: ListViewConfig): Promise<{
@@ -42,7 +51,23 @@ export async function fetchSubmissions(config: ListViewConfig): Promise<{
   if (!response.ok) {
     throw new Error('Failed to fetch submissions');
   }
-  return response.json();
+
+  const result = await response.json();
+  // Transform the data to match our InsuranceSubmission type
+  const transformedData = result.data.map((item: any) => ({
+    id: item.id,
+    formId: item['Insurance Type']?.toLowerCase().replace(' ', '_') + '_application' || 'unknown',
+    data: item,
+    status: 'pending',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }));
+
+  return {
+    columns: result.columns,
+    data: transformedData,
+    total: result.data.length,
+  };
 }
 
 interface StatesResponse {

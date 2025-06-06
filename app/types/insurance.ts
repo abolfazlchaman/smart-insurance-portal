@@ -55,6 +55,14 @@ export interface InsuranceSubmission {
   updatedAt: string;
 }
 
+export interface TransformedSubmission {
+  id: string;
+  status: 'pending' | 'approved' | 'rejected';
+  createdAt: string;
+  updatedAt: string;
+  [key: string]: any;
+}
+
 export type InsuranceType = 'health' | 'home' | 'car' | 'life';
 
 export interface ListViewConfig {
